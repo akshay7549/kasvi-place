@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Kasvi Palace{% endblock %}</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+
+  <!-- ✅ Fixed Navbar -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-black text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="{{ url_for('home') }}" class="flex items-center space-x-4">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kasvi Logo" class="h-12 w-12 rounded-full object-cover">
+        <h1 class="text-2xl font-bold tracking-wide">Kasvi Palace</h1>
+      </a>
+      <ul class="flex flex-wrap space-x-4 sm:space-x-6 text-lg">
+        <li><a href="{{ url_for('home') }}" class="hover:text-yellow-400 transition">Home</a></li>
+        <li><a href="{{ url_for('rooms') }}" class="hover:text-yellow-400 transition">Rooms</a></li>
+        <li><a href="{{ url_for('gallery') }}" class="hover:text-yellow-400 transition">Gallery</a></li>
+        <li><a href="{{ url_for('booking') }}" class="hover:text-yellow-400 transition">Booking</a></li>
+        <li><a href="{{ url_for('contact') }}" class="hover:text-yellow-400 transition">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ✅ Spacer under navbar -->
+  <div class="h-20"></div>
+
+  <!-- ✅ Page Content (flex-grow pushes footer to bottom) -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 py-6">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mb-6">
+          {% for category, message in messages %}
+            <div class="mb-4 p-4 rounded text-white
+              {% if category == 'success' %}bg-green-500
+              {% elif category == 'error' %}bg-red-500
+              {% else %}bg-blue-500{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+<!-- ✅ Sticky Footer -->
+  <footer class="bg-gradient-to-r from-black via-gray-900 to-black text-white pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+      <div>
+        <h2 class="text-2xl font-bold text-yellow-400 mb-4">Kasvi Palace</h2>
+        <p class="text-gray-300">Experience luxury & comfort at Kasvi Place.<br>We ensure your stay is relaxing and memorable.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4 text-yellow-400 flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 10-1.414 1.414l4.243 4.243a1 1 0 001.414-1.414z" /></svg>
+          Address
+        </h3>
+        <p class="text-gray-300 leading-relaxed">
+          NH 28, Main Road,<br>
+          Near Kacchi Pakki Bus Stand Road Chowk,<br>
+          Muzaffarpur, Bihar, 842002, India
+        </p>
+        <p class="mt-4 flex items-center text-gray-300">
+          <svg class="w-5 h-5 mr-2 text-yellow-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15.75h18M3 18.75h18" /></svg>
+          <a href="tel:+919031077556" class="hover:text-yellow-400">+91 90310 77556</a>
+        </p>
+        <p class="mt-2 flex items-center text-gray-300">
+          <svg class="w-5 h-5 mr-2 text-yellow-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 7.5a.75.75 0 00-.75-.75H3a.75.75 0 00-.75.75v9a.75.75 0 00.75.75h18a.75.75 0 00.75-.75v-9zM3 7.5l9 6 9-6" /></svg>
+          <a href="mailto:info@kasvihotel.com" class="hover:text-yellow-400">info@kasvihotel.com</a>
+        </p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4 text-yellow-400 flex items-center">
+          <svg class="w-5 h-5 mr-2 text-yellow-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5l7.5 6.75-7.5 6.75L4.5 11.25 12 4.5z" /></svg>
+          Connect With Us
+        </h3>
+        <div class="flex space-x-4 text-yellow-400 text-xl">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/profile.php?id=61574546293581&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" class="hover:text-white" aria-label="Facebook">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22 12a10 10 0 10-11.63 9.87v-6.99H8.9v-2.88h1.47V9.41c0-1.46.87-2.27 2.2-2.27.64 0 1.31.12 1.31.12v1.43h-.74c-.73 0-.95.46-.95.93v1.12h1.61l-.26 2.88h-1.35v6.99A10 10 0 0022 12z"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/kashvi.palace" target="_blank" rel="noopener noreferrer" class="hover:text-white" aria-label="Instagram">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zM12 8.25a3.75 3.75 0 110 7.5 3.75 3.75 0 010-7.5zm5.25-.38a.88.88 0 110 1.75.88.88 0 010-1.75zM12 9.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
+            </svg>
+          </a>
+
+          <!-- Twitter -->
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="hover:text-white" aria-label="Twitter">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c13 8 27-7 18-17z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr class="my-6 border-gray-700 w-4/5 mx-auto" />
+    <p class="text-center text-gray-500 text-xs">&copy; 2025 Kasvi Palace. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

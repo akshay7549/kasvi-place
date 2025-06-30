@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Contact Messages{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-2xl font-semibold mb-6">📬 Contact Messages</h2>
+
+    {% if messages %}
+    <div class="overflow-x-auto">
+        <table class="w-full table-auto border-collapse shadow rounded-lg overflow-hidden">
+            <thead class="bg-gray-100">
+                <tr class="text-left text-sm text-gray-600">
+                    <th class="px-4 py-2 border-b">#</th>
+                    <th class="px-4 py-2 border-b">Name</th>
+                    <th class="px-4 py-2 border-b">Email</th>
+                    <th class="px-4 py-2 border-b">Message</th>
+                    <th class="px-4 py-2 border-b">Submitted At</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+                {% for msg in messages %}
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="px-4 py-2">{{ loop.index }}</td>
+                    <td class="px-4 py-2">{{ msg[1] }}</td>
+                    <td class="px-4 py-2 text-blue-600"><a href="mailto:{{ msg[2] }}">{{ msg[2] }}</a></td>
+                    <td class="px-4 py-2 whitespace-pre-line">{{ msg[3] }}</td>
+                    <td class="px-4 py-2 text-gray-500">{{ msg[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-gray-600">No messages have been received yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
