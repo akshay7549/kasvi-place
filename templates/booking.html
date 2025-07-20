@@ -1,127 +1,79 @@
 {% extends "base.html" %}
-
 {% block title %}Booking | Kasvi Palace{% endblock %}
 
 {% block content %}
 <section class="py-24 bg-gradient-to-b from-yellow-50 to-white">
-  <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl p-10 border border-yellow-300 relative overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-12">
+  <div class="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl p-10 border border-yellow-300 relative overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-12" data-aos="fade-up">
 
-    <!-- Decorative Blobs -->
-    <div class="absolute -top-10 -left-10 w-32 h-32 bg-yellow-100 rounded-full opacity-30 animate-pulse"></div>
-    <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-yellow-200 rounded-full opacity-20 animate-pulse"></div>
-
-    <!-- ✅ About Hotel Section -->
-    <div class="flex flex-col justify-center">
-      <h2 class="text-4xl font-extrabold text-gray-800 mb-4 tracking-wide">Kasvi Palace</h2>
-      <p class="text-gray-600 leading-relaxed mb-4">
-        Nestled in the heart of Muzaffarpur, <strong>Kasvi Palace</strong> blends modern luxury with timeless charm. Whether you're visiting for business or leisure, our elegant rooms and exceptional service ensure a stay that’s both relaxing and memorable.
-      </p>
-      <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
-        <li>Luxurious rooms and suites</li>
-        <li>Convenient location near major landmarks</li>
-        <li>24/7 front desk and room service</li>
-        <li>Complimentary Wi-Fi and breakfast</li>
+    <!-- Info Section -->
+    <div class="flex flex-col justify-center" data-aos="fade-right">
+      <h2 class="text-4xl font-extrabold text-gray-800 mb-4">Kasvi Palace</h2>
+      <p class="text-gray-600 mb-4">Stay in comfort and luxury at the heart of Muzaffarpur.</p>
+      <ul class="list-disc list-inside text-gray-700 mb-6 space-y-1">
+        <li>24/7 Room Service</li>
+        <li>Free Wi-Fi & Breakfast</li>
+        <li>Near Railway Station & Main Market</li>
       </ul>
-      <img src="{{ url_for('static', filename='images/hotel-hero.jpg') }}" alt="Kasvi Palace Interior" class="rounded-xl shadow-lg mt-2">
+      <img src="{{ url_for('static', filename='images/gallery7.jpg') }}" alt="Hotel" class="rounded-xl shadow-lg mt-2">
     </div>
 
-    <!-- ✅ Booking Form -->
-    <div>
-      <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-2 tracking-wide">Book Your Stay</h2>
-      <p class="text-center text-gray-500 mb-8">Reserve your perfect getaway at Kasvi Palace.</p>
+    <!-- Booking Form -->
+    <div data-aos="fade-left">
+      <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-2">Book Your Stay</h2>
+      <p class="text-center text-gray-500 mb-8">Reserve your perfect stay at Kasvi Palace.</p>
 
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-          <div class="mb-6 space-y-4">
-            {% for category, message in messages %}
-              <div class="p-5 rounded-lg text-white font-semibold shadow-lg transition
-                {% if category == 'success' %}bg-green-500 border-l-4 border-green-700 animate-bounce
-                {% elif category == 'error' %}bg-red-500 border-l-4 border-red-700
-                {% else %}bg-gray-500{% endif %}">
-                <svg class="inline w-5 h-5 mr-2 -mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  {% if category == 'success' %}
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  {% elif category == 'error' %}
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                  {% endif %}
-                </svg>
-                {{ message }}
-              </div>
-            {% endfor %}
-          </div>
+          {% for category, message in messages %}
+            <div class="p-4 mb-4 rounded text-white {% if category == 'success' %}bg-green-500{% else %}bg-red-500{% endif %}">
+              {{ message }}
+            </div>
+          {% endfor %}
         {% endif %}
       {% endwith %}
 
-<form method="POST" action="{{ url_for('booking') }}" class="space-y-6 animate-fade-in">
-  <!-- Full Name -->
-  <div>
-    <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
-    <div class="relative">
-      <input type="text" id="name" name="name" required
-             class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
-      <svg class="w-5 h-5 absolute top-2.5 left-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4 4 0 017 17h10a4 4 0 011.879.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-      </svg>
-    </div>
+     <form method="POST" action="{{ url_for('booking') }}" class="space-y-6">
+  <!-- Name -->
+  <div data-aos="fade-up" data-aos-delay="100">
+    <label class="block mb-1 text-sm font-semibold text-gray-700">Full Name</label>
+    <input type="text" id="name" name="name" required class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-yellow-400" />
   </div>
 
   <!-- Email -->
-  <div>
-    <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
-    <div class="relative">
-      <input type="email" id="email" name="email" required
-             class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
-      <svg class="w-5 h-5 absolute top-2.5 left-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18"/>
-      </svg>
-    </div>
+  <div data-aos="fade-up" data-aos-delay="200">
+    <label class="block mb-1 text-sm font-semibold text-gray-700">Email</label>
+    <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-yellow-400" />
   </div>
 
-  <!-- ✅ Contact Number -->
-  <div>
-    <label class="block text-sm font-semibold text-gray-700 mb-1">Contact Number</label>
+  <!-- Phone -->
+  <div data-aos="fade-up" data-aos-delay="300">
+    <label class="block mb-1 text-sm font-semibold text-gray-700">Contact Number</label>
     <div class="flex gap-2">
-      <!-- Country Code -->
-      <select name="country_code" id="country_code" required
-              class="w-28 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+      <select name="country_code" required class="w-28 px-3 py-2 border rounded focus:ring-yellow-400">
         <option value="+91" selected>🇮🇳 +91</option>
         <option value="+1">🇺🇸 +1</option>
         <option value="+44">🇬🇧 +44</option>
-        <option value="+61">🇦🇺 +61</option>
-        <option value="+81">🇯🇵 +81</option>
       </select>
-
-      <!-- Phone Number -->
-      <div class="relative w-full">
-        <input type="tel" id="phone" name="phone" required pattern="[0-9]{7,15}" placeholder="Enter your number"
-               class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
-        <svg class="w-5 h-5 absolute top-2.5 right-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l2 7h9l2-4H9"/>
-        </svg>
-      </div>
+      <input type="tel" name="phone" required pattern="[0-9]{7,15}" class="w-full px-4 py-2 border rounded focus:ring-yellow-400" />
     </div>
-    <p class="text-sm text-gray-500 mt-1">Enter 7–15 digits, no dashes or spaces.</p>
   </div>
 
-  <!-- Dates -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div>
-      <label for="checkin" class="block text-sm font-semibold text-gray-700 mb-1">Check-in</label>
-      <input type="date" id="checkin" name="checkin" required
-             class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+  <!-- Check-in / Check-out -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div data-aos="fade-up" data-aos-delay="400">
+      <label class="block mb-1 text-sm font-semibold text-gray-700">Check-in</label>
+      <input type="date" id="checkin" name="checkin" required class="w-full px-4 py-2 border rounded focus:ring-yellow-400" />
     </div>
-    <div>
-      <label for="checkout" class="block text-sm font-semibold text-gray-700 mb-1">Check-out</label>
-      <input type="date" id="checkout" name="checkout" required
-             class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+    <div data-aos="fade-up" data-aos-delay="500">
+      <label class="block mb-1 text-sm font-semibold text-gray-700">Check-out</label>
+      <input type="date" id="checkout" name="checkout" required class="w-full px-4 py-2 border rounded focus:ring-yellow-400" />
     </div>
   </div>
 
   <!-- Room Type -->
-  <div>
-    <label for="room_type" class="block text-sm font-semibold text-gray-700 mb-1">Room Type</label>
-    <select name="room_type" id="room_type" required
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-400 focus:outline-none transition">
+  <div data-aos="fade-up" data-aos-delay="600">
+    <label class="block mb-1 text-sm font-semibold text-gray-700">Room Type</label>
+    <select name="room_type" required class="w-full px-4 py-2 border rounded focus:ring-yellow-400">
       <option value="">Select a room</option>
       <option>Deluxe Room</option>
       <option>Executive Suite</option>
@@ -130,17 +82,44 @@
   </div>
 
   <!-- Submit -->
-  <div class="pt-4 text-center">
-    <button type="submit"
-            class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-full shadow-lg transition duration-300 hover:scale-105">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-      </svg>
-      Confirm Booking
-    </button>
+  <div class="text-center pt-4" data-aos="fade-up" data-aos-delay="700">
+    <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 rounded-full shadow transition">Confirm Booking</button>
   </div>
 </form>
+
     </div>
   </div>
 </section>
+
+<!-- Auto-fill today’s date + Validation -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Autofill today's date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('checkin').value = today;
+
+    // Form validation
+    const form = document.getElementById('bookingForm');
+    const nameInput = document.getElementById('name');
+    const nameError = document.getElementById('nameError');
+
+    form.addEventListener('submit', function (e) {
+      const nameValue = nameInput.value.trim();
+      let isValid = true;
+
+      if (nameValue.length < 2) {
+        nameError.classList.remove('hidden');
+        nameInput.classList.add('border-red-500');
+        isValid = false;
+      } else {
+        nameError.classList.add('hidden');
+        nameInput.classList.remove('border-red-500');
+      }
+
+      if (!isValid) {
+        e.preventDefault();
+      }
+    });
+  });
+</script>
 {% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Restaurant | Kasvi Palace{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-[#0b2e2a] text-white py-16 relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h1 class="text-5xl md:text-6xl font-serif font-bold mb-4">Delightful Experience</h1>
+    <p class="text-xl text-yellow-400 mb-8">A taste of perfection in every dish – <span class="italic">fine dining with a modern twist.</span></p>
+
+    <div class="mt-10 rounded-[3rem] overflow-hidden border-4 border-[#e0c68f] shadow-xl">
+      <img src="{{ url_for('static', filename='images/restaurant-banner.jpg') }}" alt="Restaurant" class="w-full h-[500px] object-cover">
+    </div>
+
+    <!-- Book a Table Button -->
+    <div class="mt-10">
+      <a href="{{ url_for('booking') }}" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-[#0b2e2a] font-semibold py-3 px-6 rounded-lg shadow transition">
+        Book a Table
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Menu Section -->
+<section class="bg-white py-16">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-4xl font-extrabold text-center text-green-700 mb-12">Our Menu</h2>
+
+    <!-- Styled Menu Cards -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Dish Card 1 -->
+      <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+        <img src="{{ url_for('static', filename='images/paneer.jpg') }}" alt="Paneer Tikka" class="w-full h-48 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-green-700 mb-2">Paneer Tikka</h3>
+          <p class="text-gray-600">Spicy grilled paneer served with mint chutney.</p>
+        </div>
+      </div>
+
+      <!-- Dish Card 2 -->
+      <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+        <img src="{{ url_for('static', filename='images/biryani.jpg') }}" alt="Veg Biryani" class="w-full h-48 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-green-700 mb-2">Veg Biryani</h3>
+          <p class="text-gray-600">Aromatic basmati rice with seasonal vegetables and spices.</p>
+        </div>
+      </div>
+
+      <!-- Dish Card 3 -->
+      <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+        <img src="{{ url_for('static', filename='images/dal.jpg') }}" alt="Dal Makhani" class="w-full h-48 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold text-green-700 mb-2">Dal Makhani</h3>
+          <p class="text-gray-600">Slow-cooked black lentils in creamy tomato sauce.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Chefs Section -->
+<section class="bg-gray-100 py-20">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold text-green-700 mb-12">Our Chefs</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <!-- Chef 1 -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <img src="{{ url_for('static', filename='images/chef1.jpg') }}" alt="Chef 1" class="w-40 h-40 rounded-full mx-auto mb-4 object-cover">
+        <h3 class="text-xl font-semibold text-green-800">Chef Ananya</h3>
+        <p class="text-gray-500 text-sm mt-2">Expert in North Indian Cuisine</p>
+      </div>
+
+      <!-- Chef 2 -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <img src="{{ url_for('static', filename='images/chef2.jpg') }}" alt="Chef 2" class="w-40 h-40 rounded-full mx-auto mb-4 object-cover">
+        <h3 class="text-xl font-semibold text-green-800">Chef Rahul</h3>
+        <p class="text-gray-500 text-sm mt-2">Continental & Fusion Specialist</p>
+      </div>
+
+      <!-- Chef 3 -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <img src="{{ url_for('static', filename='images/chef3.jpg') }}" alt="Chef 3" class="w-40 h-40 rounded-full mx-auto mb-4 object-cover">
+        <h3 class="text-xl font-semibold text-green-800">Chef Priya</h3>
+        <p class="text-gray-500 text-sm mt-2">Pastry & Dessert Expert</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

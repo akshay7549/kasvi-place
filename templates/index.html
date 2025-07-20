@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kasvi Palace</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
     body {
       font-family: 'Playfair Display', serif;
@@ -17,17 +17,27 @@
 
 <body class="bg-gray-50 text-gray-800">
 
- <!-- Navbar -->
+  <!-- Navbar -->
+  <!-- ✅ Responsive Navbar -->
 <nav class="fixed top-0 left-0 w-full z-50 bg-black text-white shadow-lg">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-    <!-- Logo & Title -->
+  <div class="w-full px-4 py-4 flex justify-between items-center">
+
+    <!-- Logo -->
     <a href="{{ url_for('home') }}" class="flex items-center space-x-4">
       <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Kasvi Logo" class="h-12 w-12 rounded-full object-cover">
       <h1 class="text-2xl font-bold tracking-wide">Kasvi Palace</h1>
     </a>
 
-    <!-- Navigation Links -->
-    <ul class="flex space-x-6 text-lg">
+    <!-- Hamburger Button (Mobile Only) -->
+    <button id="menu-toggle" class="md:hidden focus:outline-none">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+           viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex flex-wrap space-x-4 sm:space-x-6 text-lg">
       <li><a href="{{ url_for('home') }}" class="hover:text-yellow-400 transition">Home</a></li>
       <li><a href="{{ url_for('rooms') }}" class="hover:text-yellow-400 transition">Rooms</a></li>
       <li><a href="{{ url_for('gallery') }}" class="hover:text-yellow-400 transition">Gallery</a></li>
@@ -35,28 +45,57 @@
       <li><a href="{{ url_for('contact') }}" class="hover:text-yellow-400 transition">Contact</a></li>
     </ul>
   </div>
+
+  <!-- Mobile Menu -->
+  <ul id="mobile-menu" class="md:hidden hidden flex flex-col px-4 pb-4 space-y-2 text-lg">
+    <li><a href="{{ url_for('home') }}" class="hover:text-yellow-400 transition">Home</a></li>
+    <li><a href="{{ url_for('rooms') }}" class="hover:text-yellow-400 transition">Rooms</a></li>
+    <li><a href="{{ url_for('gallery') }}" class="hover:text-yellow-400 transition">Gallery</a></li>
+    <li><a href="{{ url_for('booking') }}" class="hover:text-yellow-400 transition">Booking</a></li>
+    <li><a href="{{ url_for('contact') }}" class="hover:text-yellow-400 transition">Contact</a></li>
+  </ul>
 </nav>
 
+  <!-- Hero Carousel -->
+  <section class="relative h-[100vh] w-full overflow-hidden mt-[80px]">
+    <div id="hero-slider" class="absolute inset-0 w-full h-full z-0">
+      <div class="hero-slide absolute w-full h-full bg-cover bg-center transition-all duration-1000 opacity-100 z-10"
+           style="background-image: url('{{ url_for('static', filename='images/hotel-hero.jpg') }}');">
+        <div class="bg-black bg-opacity-60 w-full h-full flex items-center justify-center text-center">
+          <div class="text-white px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Kasvi Palace</h2>
+            <p class="text-lg md:text-xl mb-6">Experience comfort and luxury in one place</p>
+            <a href="{{ url_for('booking') }}" class="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-500 transition">Book Now</a>
+          </div>
+        </div>
+      </div>
 
-<!-- Multi-Slide Hero Section with Unique Text -->
-<section class="relative h-[100vh] w-full overflow-hidden">
-  <div id="hero-slider" class="absolute inset-0 w-full h-full z-0">
+      <div class="hero-slide absolute w-full h-full bg-cover bg-center transition-all duration-1000 opacity-0 z-0"
+           style="background-image: url('{{ url_for('static', filename='images/hotel-hero3.jpg') }}');">
+        <div class="bg-black bg-opacity-60 w-full h-full flex items-center justify-center text-center">
+          <div class="text-white px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">Celebrate Your Special Moments</h2>
+            <p class="text-lg md:text-xl mb-6">Ideal venue for weddings, birthdays, and more</p>
+            <a href="{{ url_for('contact') }}" class="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-500 transition">Enquire Now</a>
+          </div>
+        </div>
+      </div>
 
-    <!-- Slide 1 -->
-    <div class="hero-slide absolute w-full h-full bg-cover bg-center transition-opacity duration-1000 opacity-100" style="background-image: url('../static/images/hotel-hero.jpg');">
-      <div class="bg-black bg-opacity-60 w-full h-full flex items-center justify-center text-center">
-        <div class="text-white px-6">
-          <h2 class="text-4xl md:text-6xl font-bold mb-4">Welcome to Kasvi Palace</h2>
-          <p class="text-lg md:text-xl mb-6">Experience comfort and luxury in one place</p>
-          <a href="{{ url_for('booking') }}" class="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-500 transition">Book Now</a>
+      <div class="hero-slide absolute w-full h-full bg-cover bg-center transition-all duration-1000 opacity-0 z-0"
+           style="background-image: url('{{ url_for('static', filename='images/Boardroom.jpg') }}');">
+        <div class="bg-black bg-opacity-60 w-full h-full flex items-center justify-center text-center">
+          <div class="text-white px-6">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">Modern Comfort Meets Heritage</h2>
+            <p class="text-lg md:text-xl mb-6">Relax in our beautifully designed spaces</p>
+            <a href="{{ url_for('rooms') }}" class="bg-yellow-400 text-black px-6 py-3 rounded hover:bg-yellow-500 transition">Explore Rooms</a>
+          </div>
         </div>
       </div>
     </div>
-</section>
-
+  </section>
     <!-- Room Listings -->
   <section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10">
+    <div class="max-w-6xl mx-auto px-2 grid md:grid-cols-3 gap-10">
 
       <!-- Room Card -->
       <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition">
@@ -64,125 +103,140 @@
         <div class="p-6">
           <h3 class="text-xl font-semibold mb-2">Deluxe Room</h3>
           <p class="text-gray-700 mb-4">Spacious room with king-sized bed, AC, and balcony view.</p>
-          <span class="text-yellow-500 font-bold text-lg">₹2999/night</span>
-        </div>
+          <span class="text-yellow-500 font-bold text-lg">₹2499/night</span>
+          <br>
+          <br>
+          <a href="{{ url_for('booking') }}" class="bg-yellow-300 text-black px-4 py-3 rounded hover:bg-yellow-500 transition">Book Now</a></div>
       </div>
 
       <!-- Room Card -->
       <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition">
         <img src="../static/images/gallery2.jpg" alt="Room 2" class="w-full h-48 object-cover rounded-t-lg">
         <div class="p-6">
-          <h3 class="text-xl font-semibold mb-2">Executive Suite</h3>
+          <h3 class="text-xl font-semibold mb-2">Business Class</h3>
           <p class="text-gray-700 mb-4">Premium suite with sofa, bath tub, Wi-Fi, and workspace.</p>
-          <span class="text-yellow-500 font-bold text-lg">₹4999/night</span>
-        </div>
+          <span class="text-yellow-500 font-bold text-lg">₹3999/night</span>
+          <br>
+          <br>
+          <a href="{{ url_for('booking') }}" class="bg-yellow-300 text-black px-4 py-3 rounded hover:bg-yellow-500 transition">Book Now</a></div>
       </div>
 
       <!-- Room Card -->
       <div class="bg-gray-100 rounded-lg shadow hover:shadow-lg transition">
         <img src="../static/images/gallery7.jpg" alt="Room 3" class="w-full h-48 object-cover rounded-t-lg">
         <div class="p-6">
-          <h3 class="text-xl font-semibold mb-2">Family Room</h3>
+          <h3 class="text-xl font-semibold mb-2">Super Deluxe</h3>
           <p class="text-gray-700 mb-4">Ideal for families with 2 double beds and child-friendly features.</p>
-          <span class="text-yellow-500 font-bold text-lg">₹3999/night</span>
+          <span class="text-yellow-500 font-bold text-lg">₹2999/night</span>
+          <br>
+          <br>
+          <a href="{{ url_for('booking') }}" class="bg-yellow-300 text-black px-4 py-3 rounded hover:bg-yellow-500 transition">Book Now</a>
         </div>
       </div>
     </div>
   </section>
 
- <!-- ✅ Banquets & Boardroom Section -->
-<section class="bg-gray-900 text-white py-20 px-6" id="banquets">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 items-center">
+ <!-- ✅ Banquets & Bedroom Section with animation -->
+  <section class="bg-gray-900 text-white py-20 px-6" id="banquets">
+    <div class="max-w-8xl mx-auto grid md:grid-cols-3 gap-12 items-center">
+      <div class="md:col-span-1" data-aos="fade-right" data-aos-duration="1000">
+        <h4 class="text-yellow-400 uppercase tracking-widest mb-2">Events</h4>
+        <h2 class="text-4xl font-bold mb-4">Banquets & Boardroom</h2>
+        <p class="text-gray-300 mb-6">
+          Kasvi Palace offers a premium indoor venue that provides the perfect setting for a wide range of memorable events...
+        </p>
+        <div class="flex items-center gap-3 mt-4">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 5h2l.4 2M7 5h13l-1.5 9H8.5L7 5zm5 16a2 2 0 100-4 2 2 0 000 4zm6 0a2 2 0 100-4 2 2 0 000 4z" />
+          </svg>
+          <div>
+            <p class="text-sm text-gray-400">For information</p>
+            <p class="text-yellow-400 font-semibold">+91 90310 77556</p>
+          </div>
+        </div>
+      </div>
 
-    <!-- Left Description -->
-    <div class="md:col-span-1">
-      <h4 class="text-yellow-400 uppercase tracking-widest mb-2">Events</h4>
-      <h2 class="text-4xl font-bold mb-4">Banquets & Boardroom</h2>
-      <p class="text-gray-300 mb-6">
-        A premium indoor venue which is perfect for Wedding, Engagements, Reception, Birthday Celebration, Corporate Meetings & any kinds of events.
-      </p>
-      <div class="flex items-center gap-3 mt-4">
-        <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M3 5h2l.4 2M7 5h13l-1.5 9H8.5L7 5zm5 16a2 2 0 100-4 2 2 0 000 4zm6 0a2 2 0 100-4 2 2 0 000 4z" />
-        </svg>
-        <div>
-          <p class="text-sm text-gray-400">For information</p>
-          <p class="text-yellow-400 font-semibold">+91-9297871703</p>
+      <div class="bg-white text-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in" data-aos-delay="200">
+        <img src="../static/images/stage.jpg" alt="Mehandi Banquet Hall" class="w-full h-56 object-cover">
+        <div class="p-6 space-y-2">
+          <h3 class="text-xl font-bold mb-2">Mehandi Banquet Hall</h3>
+          <ul class="list-none space-y-1 text-sm">
+            <li>✓ Complementary Wi-Fi</li>
+            <li>✓ In-house decor and catering services</li>
+            <li>✓ Veg & Non-veg available</li>
+            <li>✓ Ample parking and lodging</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white text-gray-900 rounded-lg shadow-lg overflow-hidden" data-aos="zoom-in" data-aos-delay="400">
+        <img src="../static/images/lobby3.jpg" alt="Boardroom" class="w-full h-56 object-cover">
+        <div class="p-6 space-y-2">
+          <h3 class="text-xl font-bold mb-2">Banquet Hall</h3>
+          <ul class="list-none space-y-1 text-sm">
+            <li>✓ Complementary Wi-Fi</li>
+            <li>✓ In-house decor and catering services</li>
+            <li>✓ Veg & Non-veg available</li>
+            <li>✓ Ample parking and lodging</li>
+          </ul>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Banquet 1 -->
-    <div class="bg-white text-gray-900 rounded-lg shadow-lg overflow-hidden">
-      <img src="../static/images/mehandi.jpg" alt="Mehandi Banquet Hall" class="w-full h-56 object-cover">
-      <div class="p-6 space-y-2">
-        <h3 class="text-xl font-bold mb-2">Mehandi Banquet Hall</h3>
-        <ul class="list-none space-y-1 text-sm">
-          <li>✓ Complementary Wi-Fi</li>
-          <li>✓ In-house decor and catering services provided</li>
-          <li>✓ Serves both veg and non-veg food</li>
-          <li>✓ Ample parking space and lodging rooms</li>
-        </ul>
+  <!-- ✅ About / Boutique Hotel Section with animation -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+      <div data-aos="fade-up" data-aos-duration="1000">
+        <div class="flex items-center mb-2 text-yellow-500 text-xl">★★★★★</div>
+        <p class="uppercase text-sm text-gray-400 tracking-widest">The Kasvi Palace</p>
+        <h2 class="text-4xl font-bold text-gray-800 mb-6">A Boutique Hotel</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Kasvi Palace offers a luxurious and versatile indoor venue tailored to host a wide range of events with elegance and sophistication...
+        </p>
+        <p class="text-gray-600 mb-6">
+          Its refreshing decor, gracious hospitality, and warm ambiance combine to form a memorable experience for the guests.
+          <span class="text-blue-600 hover:underline cursor-pointer">View more...</span>
+        </p>
+        <div class="flex items-center gap-4 text-lg font-semibold text-gray-800">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 5h12M9 3v2m3 0v12M3 11h12M5 15h6m-3 6h.01"></path>
+          </svg>
+          Reservation: <span class="text-orange-600">+91-90310 77556</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4" data-aos="zoom-in" data-aos-delay="300">
+        <img src="../static/images/lobby%202.jpg" alt="Lobby" class="rounded-lg shadow-md">
+        <img src="../static/images/hall.jpeg" alt="Hotel building" class="rounded-lg shadow-md">
       </div>
     </div>
+  </section>
 
-    <!-- Banquet 2 -->
-    <div class="bg-white text-gray-900 rounded-lg shadow-lg overflow-hidden">
-      <img src="../static/images/gallery7.jpg" alt="Darbar Banquet Hall" class="w-full h-56 object-cover">
-      <div class="p-6 space-y-2">
-        <h3 class="text-xl font-bold mb-2">family room</h3>
-        <ul class="list-none space-y-1 text-sm">
-          <li>✓ Complementary Wi-Fi</li>
-          <li>✓ In-house decor and catering services provided</li>
-          <li>✓ Serves both veg and non-veg food</li>
-          <li>✓ Ample parking space and lodging rooms</li>
-        </ul>
-      </div>
-    </div>
+ <!-- WhatsApp Floating Button with Tooltip -->
+<a href="https://wa.me/919031077556?text=Hi%2C%20I'm%20interested%20in%20booking%20a%20room%20at%20Kasvi%20Palace."
+   target="_blank"
+   class="fixed bottom-6 right-6 group bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-lg flex items-center space-x-2 z-50"
+   title="Chat with us on WhatsApp">
 
-  </div>
-</section>
+  <!-- WhatsApp Icon -->
+  <svg class="w-5 h-5 fill-white" viewBox="0 0 32 32">
+    <path d="M16.003 3C9.378 3 4 8.377 4 15.004a11.934 11.934 0 001.57 5.864L4 29l8.387-1.488A11.951 11.951 0 0016.003 27c6.625 0 11.998-5.378 11.998-11.996C28.001 8.377 22.628 3 16.003 3zM16 24.818a9.837 9.837 0 01-4.999-1.377l-.357-.21-4.978.882.922-4.856-.23-.375A9.793 9.793 0 016.186 15c0-5.434 4.417-9.853 9.817-9.853 5.414 0 9.832 4.42 9.832 9.853s-4.418 9.818-9.832 9.818z"/>
+  </svg>
 
-<!-- ABOUT / BOUTIQUE HOTEL SECTION -->
-<section class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+  <span class="font-semibold"></span>
 
-    <!-- Text Content -->
-    <div>
-      <div class="flex items-center mb-2 text-yellow-500 text-xl">
-        ★★★★★
-      </div>
-      <p class="uppercase text-sm text-gray-400 tracking-widest">The Kasvi Palace</p>
-      <h2 class="text-4xl font-bold text-gray-800 mb-6">A Boutique Hotel</h2>
-      <p class="text-gray-600 leading-relaxed mb-4">
-        Kasvi Palace stands out for its elegant luxury accommodation and breathtaking views in the heart of Muzaffarpur.
-        Whether you’re travelling for business or leisure, you can relax and enjoy the highest standard of international
-        hospitality in exquisite surroundings. The hotel is conveniently located near Bhikanpur Dih Chowk, Muzaffarpur.
-      </p>
-      <p class="text-gray-600 mb-6">
-        Its refreshing decor, gracious hospitality, and warm ambiance combine to form a memorable experience for the guests.
-        <span class="text-blue-600 hover:underline cursor-pointer">View more...</span>
-      </p>
-
-      <div class="flex items-center gap-4 text-lg font-semibold text-gray-800">
-        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
-             viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
-             d="M3 5h12M9 3v2m3 0v12M3 11h12M5 15h6m-3 6h.01"></path></svg>
-        Reservation: <span class="text-orange-600">+91-90310 77556</span>
-      </div>
-    </div>
-
-    <!-- Image Content -->
-    <div class="grid grid-cols-2 gap-4">
-      <img src="../static/images/lobby%202.jpg" alt="Lobby" class="rounded-lg shadow-md">
-      <img src="../static/images/gallery4.jpg" alt="Hotel building" class="rounded-lg shadow-md">
-    </div>
-  </div>
-</section>
+  <!-- Tooltip on hover -->
+  <span class="absolute bottom-full right-0 mb-2 hidden group-hover:block bg-black text-white text-xs px-2 py-1 rounded shadow-lg">
+    Chat with us on WhatsApp
+  </span>
+</a>
 
 <!-- ✅ Sticky Footer -->
   <footer class="bg-gradient-to-r from-black via-gray-900 to-black text-white pt-12 pb-8">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+    <div class="max-w-8xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
       <div>
         <h2 class="text-2xl font-bold text-yellow-400 mb-4">Kasvi Palace</h2>
         <p class="text-gray-300">Experience luxury & comfort at Kasvi Place.<br>We ensure your stay is relaxing and memorable.</p>
@@ -203,7 +257,7 @@
         </p>
         <p class="mt-2 flex items-center text-gray-300">
           <svg class="w-5 h-5 mr-2 text-yellow-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 7.5a.75.75 0 00-.75-.75H3a.75.75 0 00-.75.75v9a.75.75 0 00.75.75h18a.75.75 0 00.75-.75v-9zM3 7.5l9 6 9-6" /></svg>
-          <a href="mailto:info@kasvihotel.com" class="hover:text-yellow-400">info@kasvihotel.com</a>
+          <a href="kashvipalacemfp@gmail.com" class="hover:text-yellow-400">kashvipalacemfp@gmail.com</a>
         </p>
       </div>
       <div>
@@ -238,10 +292,18 @@
     <hr class="my-6 border-gray-700 w-4/5 mx-auto" />
     <p class="text-center text-gray-500 text-xs">&copy; 2025 Kasvi Palace. All rights reserved.</p>
   </footer>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true });
+  </script>
+  <script>
+  document.getElementById('menu-toggle').addEventListener('click', function () {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+  });
+</script>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-
 </body>
 </html>
 

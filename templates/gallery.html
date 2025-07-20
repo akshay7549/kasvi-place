@@ -3,25 +3,58 @@
 {% block title %}Gallery | Kasvi Palace{% endblock %}
 
 {% block content %}
+<!-- Lightbox2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
+
 <section class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-6 text-center">
     <h2 class="text-4xl font-bold mb-12 text-gray-800">Hotel Gallery</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {% set images = ['gallery1.jpg', 'gallery2.jpg', 'gallery4.jpg', 'gallery5.jpg', 'gallery6.jpg', 'gallery7.jpg', 'gallery8.jpg', 'gallery9.jpg', 'mehandi.jpg', 'lobby 2.jpg', 'rooms 3.jpg', 'gallery10.jpg', 'gallery11.jpg', 'rooms.jpg', 'rooms 1.jpg'] %}
+      {% set images = [
+        'gallery1.jpg', 'gallery2.jpg', 'lobby3.jpg', 'gallery5.jpg', 'gallery6.jpg',
+        'gallery7.jpg', 'gallery8.jpg', 'gallery9.jpg', 'stage.jpg', 'lobby 2.jpg',
+        'rooms 3.jpg', 'gallery10.jpg', 'gallery11.jpg', 'lobby1.jpg', 'rooms6.jpg',
+        'rooms 4.jpg', 'lobby3.jpg', 'hall.jpeg'
+      ] %}
+
+      {% set captions = {
+        'gallery1.jpg': 'Rooms view',
+        'gallery2.jpg': 'Couple Room',
+        'hotel-hero1.jpg': 'Outer view',
+        'gallery5.jpg': 'Front view',
+        'gallery6.jpg': 'Food',
+        'gallery7.jpg': 'Premium Room',
+        'gallery8.jpg': 'Reception',
+        'gallery9.jpg': 'Dinning area',
+        'mehandi.jpg': 'Wedding Decoration',
+        'lobby 2.jpg': 'Modern Lobby',
+        'rooms 3.jpg': 'Spacious Bedroom',
+        'gallery10.jpg': 'Reception Area',
+        'gallery11.jpg': 'Dinning area',
+        'rooms.jpg': 'Couple Room',
+        'rooms 1.jpg': 'Family Room'
+      } %}
+
       {% for img in images %}
       <div class="overflow-hidden rounded-lg shadow-md group">
-        <img
-          src="{{ url_for('static', filename='images/' ~ img) }}"
-          alt="Hotel view {{ loop.index }}"
-          class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-        >
-        <!-- Optional caption -->
-        <!-- <p class="mt-2 text-sm text-gray-600">Caption {{ loop.index }}</p> -->
+        <a href="{{ url_for('static', filename='images/' ~ img) }}"
+           data-lightbox="kasvi-gallery"
+           data-title="{{ captions.get(img, 'Kasvi Palace') }}">
+          <img
+            loading="lazy"
+            src="{{ url_for('static', filename='images/' ~ img) }}"
+            alt="{{ captions.get(img, 'Kasvi Palace') }}"
+            class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+          >
+        </a>
+        <p class="mt-2 text-sm text-gray-600">{{ captions.get(img, 'Kasvi Palace') }}</p>
       </div>
       {% endfor %}
     </div>
-
   </div>
 </section>
+
+<!-- Lightbox2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
 {% endblock %}

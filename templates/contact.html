@@ -4,55 +4,16 @@
 
 {% block content %}
 <section class="py-20 bg-gray-100">
-  <div class="max-w-6xl mx-auto px-6 space-y-16">
+  <div class="max-w-6xl mx-auto px-6 space-y-20">
 
-    <!-- Contact Info + Form Grid -->
-    <div class="grid md:grid-cols-2 gap-10">
+    <!-- Contact Info + Form -->
+    <div class="grid md:grid-cols-2 gap-12">
+
       <!-- Contact Info -->
       <div>
         <h2 class="text-4xl font-bold mb-6 text-gray-800">Get in Touch</h2>
-        <p class="mb-4 text-gray-600">We’re here to help and answer any questions you might have. We look forward to hearing from you.</p>
-
-        <ul class="text-gray-700 space-y-4">
-          <li class="flex items-start gap-3">
-            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M3 5h2l.4 2M7 5h13l-1.5 9H8.5L7 5zm5 16a2 2 0 100-4 2 2 0 000 4zm6 0a2 2 0 100-4 2 2 0 000 4z" />
-            </svg>
-            NH 28, Main Road, near Kacchi Pakki Bus Stand Road Chowk, Muzaffarpur, Bihar, 842002
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            info@kasvihotel.com
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M3 5a2 2 0 012-2h3.586a1 1 0 01.707.293l1.414 1.414a1 1 0 00.707.293H19a2 2 0 012 2v2H3V5zM3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-            </svg>
-            +91 90310 77556
-          </li>
-        </ul>
-      </div>
-
-      <!-- Contact Form -->
-      <div class="bg-white p-8 shadow rounded-lg">
         <h3 class="text-2xl font-semibold mb-6 text-gray-800">Send Us a Message</h3>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="mb-4 p-4 rounded text-white
-                {% if category == 'success' %}bg-green-500
-                {% elif category == 'error' %}bg-red-500
-                {% else %}bg-gray-600{% endif %}">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-
-        <form method="POST" action="{{ url_for('contact') }}" class="space-y-4">
+         <form method="POST" action="{{ url_for('contact') }}" class="space-y-4">
           <div>
             <label for="name" class="block mb-1 font-medium">Your Name</label>
             <input type="text" id="name" name="name" value="{{ request.form.name or '' }}"
@@ -85,17 +46,65 @@
       </div>
     </div>
 
-    <!-- Full-width Google Map -->
+        <p class="text-lg text-gray-600 mb-4">
+          At <strong>Kasvi Palace</strong>, we are committed to offering you an exceptional experience — whether you're staying with us, planning an event, or simply curious about our services.
+        </p>
+        <p class="text-lg text-gray-600 mb-8">
+          Our team is available to assist you with bookings, venue details, event planning, and general inquiries. Don’t hesitate to reach out — we’d love to help you create memorable moments.
+        </p>
+
+        <ul class="text-gray-700 space-y-5 text-md">
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-yellow-500 mt-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 5h2l.4 2M7 5h13l-1.5 9H8.5L7 5zm5 16a2 2 0 100-4 2 2 0 000 4zm6 0a2 2 0 100-4 2 2 0 000 4z" />
+            </svg>
+            NH 28, Main Road, near Kacchi Pakki Bus Stand Road Chowk,<br>Muzaffarpur, Bihar, 842002
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-yellow-500 mt-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <a href="mailto:kashvipalacemfp@gmail.com" class="hover:underline text-blue-600">kashvipalacemfp@gmail.com</a>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-yellow-500 mt-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 5a2 2 0 012-2h3.586a1 1 0 01.707.293l1.414 1.414a1 1 0 00.707.293H19a2 2 0 012 2v2H3V5zM3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+            </svg>
+            <a href="tel:+919031077556" class="hover:underline text-blue-600">+91 90310 77556</a>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-6 h-6 text-green-500 mt-1" fill="currentColor" viewBox="0 0 32 32">
+              <path d="M16.003 3C9.378 3 4 8.377 4 15.004a11.934 11.934 0 001.57 5.864L4 29l8.387-1.488A11.951 11.951 0 0016.003 27c6.625 0 11.998-5.378 11.998-11.996C28.001 8.377 22.628 3 16.003 3zM16 24.818a9.837 9.837 0 01-4.999-1.377l-.357-.21-4.978.882.922-4.856-.23-.375A9.793 9.793 0 016.186 15c0-5.434 4.417-9.853 9.817-9.853 5.414 0 9.832 4.42 9.832 9.853s-4.418 9.818-9.832 9.818z"/>
+            </svg>
+            <a href="https://wa.me/919031077556" target="_blank" class="text-green-600 hover:underline">Chat with us on WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="bg-white p-8 shadow rounded-lg">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="mb-4 p-4 rounded text-white
+                {% if category == 'success' %}bg-green-500
+                {% elif category == 'error' %}bg-red-500
+                {% else %}bg-gray-600{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+
+
+    <!-- Google Map -->
     <div>
       <h3 class="text-2xl font-semibold mb-6 text-gray-800 text-center">Our Location</h3>
       <div class="w-full h-[450px] rounded-xl overflow-hidden shadow-lg">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.2213893114863!2d85.38500677519477!3d26.091690877146085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed1113d01309f7%3A0x69da6fab6ace4195!2sKASHVI%20PALACE!5e0!3m2!1sen!2sin!4v1751185831807!5m2!1sen!2sin"
-          width="100%"
-          height="100%"
-          style="border:0;"
-          allowfullscreen=""
-          loading="lazy"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
@@ -103,4 +112,6 @@
 
   </div>
 </section>
+
+
 {% endblock %}
